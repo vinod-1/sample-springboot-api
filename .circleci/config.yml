@@ -2,29 +2,22 @@ version: 2
 jobs:
   build:
     docker:
-      # https://circleci.com/docs/2.0/circleci-images/#openjdk
-      - image: circleci/openjdk:11.0.1-jdk
-
+    - image: circleci/openjdk:11.0.1-jdk
     working_directory: ~/sample-springboot-api
-    
     steps:
-      # git pull
-      - checkout
-
-      # setup testing env
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - run:
-          name: Login to DockerHub
-          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
-  
-      # package into a jar
-      - run: mvn clean package
-
-      # build and push docker image to docker hub
-      - run: mvn clean compile jib:build -Dimage=vinodplank/junacards:$CIRCLE_BUILD_NUM
-
-      # store raw contents of src code
-      - store_artifacts:
-          path: target/classes
-          destination: sample-springboot-api
+    - checkout
+    - setup_remote_docker:
+        docker_layer_caching: true
+    - run:
+        name: Login to DockerHub
+        command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+    - run: mvn clean package
+    - run: mvn clean compile jib:build -Dimage=vinodplank/junacards:$CIRCLE_BUILD_NUM
+    - store_artifacts:
+        path: target/classes
+        destination: sample-springboot-api
+workflows:
+  version: 2
+  workflow:
+    jobs:
+    - build
