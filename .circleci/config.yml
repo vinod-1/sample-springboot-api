@@ -1,4 +1,6 @@
-version: 2
+version: 2.1
+orbs:
+  notify-slack: interstellar/notify-slack@0.2.0
 jobs:
   build:
     docker:
@@ -17,7 +19,7 @@ jobs:
         path: target/classes
         destination: sample-springboot-api
 workflows:
-  version: 2
+  version: 2.1
   workflow:
     jobs:
     - build
