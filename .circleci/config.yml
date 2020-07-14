@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  notify-slack: interstellar/notify-slack@0.2.0
+  slack: circleci/slack@3.4.2
 jobs:
   build:
     docker:
