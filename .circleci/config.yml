@@ -8,9 +8,6 @@ jobs:
     working_directory: ~/sample-springboot-api
     steps:
     - checkout
-    - slack/status:
-          fail_only: true
-          webhook: webhook
 #- setup_remote_docker:
 #        docker_layer_caching: true
     - run:
@@ -21,6 +18,9 @@ jobs:
     - store_artifacts:
         path: target/classes
         destination: sample-springboot-api
+    - slack/status:
+          fail_only: false
+          webhook: webhook
 workflows:
   version: 2.1
   workflow:
