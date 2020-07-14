@@ -20,7 +20,7 @@ jobs:
         destination: sample-springboot-api
     - slack/status:
           fail_only: false
-          webhook: webhook
+          webhook: $webhook
 workflows:
   version: 2.1
   workflow:
