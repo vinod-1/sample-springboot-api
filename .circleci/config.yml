@@ -10,11 +10,7 @@ jobs:
     - checkout
 #- setup_remote_docker:
 #        docker_layer_caching: true
-    - run:
-        name: Login to DockerHub
-        command: docker login -u $DOCKER_USER -p $DOCKER_PASS
     - run: mvn clean package
-    - run: mvn clean compile jib:build -Dimage=vinodplank/junacards:$CIRCLE_BUILD_NUM
     - store_artifacts:
         path: target/classes
         destination: sample-springboot-api
